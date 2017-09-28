@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div class="jumbo">
+          <h2>Flask App</h2>
+          <h3>Template for a Flask application</h3>
+  <div class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd">
+  </div>
+  <div class="form-group">
+    <label for="ajax">Ajax:</label>
+    <textarea class="form-control" id="ajax"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="d3">D3:</label>
+    <textarea class="form-control" id="d3"></textarea>
+  </div>
+  <div class="checkbox">
+    <label><input type="checkbox"> Remember me</label>
+  </div>
+  <button id="go" onclick="clickEvent();" class="btn btn-default">Submit</button>
+        </div>
+      </div> 	
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+function clickEvent() {
+
+    var inp = $("#d3").val()
+    alert(inp);
+    alert('hello');
+    
+    d3.json('/data')
+    .header("Content-Type", "application/json")
+    .post(JSON.stringify({a: inp, b: 3}),function(error, data) {
+      alert(data.b);
+      $("#ajax").html(data.a)
+    });
+
+}
+</script>
+
+{% endblock %}
